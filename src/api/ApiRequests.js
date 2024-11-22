@@ -7,10 +7,12 @@ const apiRequest = async (prompt, file = null, model = "llava") => {
     prompt: prompt,
     model: model,
     stream: false,
-    images: null,
+    images: [],
   };
-
-  data.images = file ? `[${file}]` : null;
+  if (file) {
+    data.images.push(file);
+  }
+  console.log(data);
 
   const options = {
     method: "POST",
@@ -20,7 +22,11 @@ const apiRequest = async (prompt, file = null, model = "llava") => {
     body: JSON.stringify(data),
   };
 
+  console.log(options);
+
   const response = await fetch(endpoint, options);
+
+  console.log(response);
 
   if (!response.ok) {
     const errorText = await response.text();

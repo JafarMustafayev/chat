@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import handleFileUpload from "../Utils/Coder";
+import base64 from "base64-encode-file";
 
 const InputContainer = ({
   input,
@@ -47,6 +48,7 @@ const InputContainer = ({
     if (input.trim()) {
       handleSend();
       setInput("");
+      setFile(null);
       setScrollHeight(0);
     }
   };
@@ -60,7 +62,10 @@ const InputContainer = ({
           accept=".jpg, .jpeg, .png"
           style={{ display: "none" }}
           onChangeCapture={async (e) => {
-            setFile(await handleFileUpload(e.target.files[0]));
+            debugger;
+            var res = await base64(e.target.files[0]);
+            res = res.split("base64,")[1];
+            setFile(res);
           }}
         />
         <button
