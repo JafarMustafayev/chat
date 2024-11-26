@@ -2,7 +2,7 @@
 
 const apiRequest = async (prompt, file = null, model = "llava") => {
   const endpoint = "http://localhost:11434/api/generate";
-  debugger;
+
   const data = {
     prompt: prompt,
     model: model,
@@ -17,11 +17,7 @@ const apiRequest = async (prompt, file = null, model = "llava") => {
     body: JSON.stringify(data),
   };
 
-  console.log(options);
-
   const response = await fetch(endpoint, options);
-
-  console.log(response);
 
   if (!response.ok) {
     const errorText = await response.text();
