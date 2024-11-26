@@ -53,19 +53,30 @@ const InputContainer = ({
     }
   };
 
+  const AddedImages = async (files) => {
+    var image = [];
+    for (let index = 0; index < files.length; index++) {
+      const element = files[index];
+      var res = await base64(element);
+      res = res.split("base64,")[1];
+      image.push(res);
+      setFile(element);
+      console.log(file);
+    }
+    setFile(image);
+  };
+
   return (
     <div className="bg-input p-2 m-2 rounded-3xl w-[95%] md:w-[75%] lg:w-[42%] flex items-end justify-between">
       <div className="justify-start">
         <input
           type="file"
           id="file"
+          multiple
           accept=".jpg, .jpeg, .png"
           style={{ display: "none" }}
           onChangeCapture={async (e) => {
-            debugger;
-            var res = await base64(e.target.files[0]);
-            res = res.split("base64,")[1];
-            setFile(res);
+            AddedImages(e.target.files);
           }}
         />
         <button

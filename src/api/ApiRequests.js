@@ -7,13 +7,8 @@ const apiRequest = async (prompt, file = null, model = "llava") => {
     prompt: prompt,
     model: model,
     stream: false,
-    images: [],
+    images: file,
   };
-  if (file) {
-    data.images.push(file);
-  }
-  console.log(data);
-
   const options = {
     method: "POST",
     headers: {

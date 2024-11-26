@@ -20,7 +20,7 @@ const ChatWindow = () => {
         {
           text: input,
           isUser: true,
-          image: [].concat(file),
+          image: file,
         },
       ]);
 
@@ -33,7 +33,7 @@ const ChatWindow = () => {
           text: "",
           isUser: false,
           isLoading: true,
-          image: [],
+          image: null,
         },
       ]);
       sendApiRequests();
