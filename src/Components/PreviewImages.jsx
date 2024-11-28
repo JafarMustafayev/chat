@@ -1,31 +1,26 @@
 import { useEffect, useState } from "react";
 
-function PreviewImages({ files, setFiles }) {
-  const [isShow, setIsShow] = useState(false);
-
+function PreviewImages({ files, setFiles, showPreview, setShowPreview }) {
   useEffect(() => {
     if (files && files.length > 0) {
-      setIsShow(true);
+      setShowPreview(true);
     } else {
-      setIsShow(false);
+      setShowPreview(false);
     }
   }, [files]);
 
   const handleRemove = (index) => {
-    var newFiles = files.filter((file, i) => i !== index);
+    var newFiles = files.filter((i) => i !== index);
     setFiles(newFiles);
   };
 
-  if (isShow) {
+  if (showPreview) {
     return (
       <>
-        <div className="flex">
+        <div className="flex flex-wrap  items-end ">
           {files.map((file, index) => {
             return (
-              <div
-                id="imagePreview"
-                className="flex flex-nowrap gap-2  p-2  items-end justify-between "
-              >
+              <div id="imagePreview" className=" gap-2  p-2  ">
                 <div className="group relative inline-block text-sm text-token-text-primary ">
                   <div
                     class="relative overflow-hidden border border-token-border-light bg-token-main-surface-primary rounded-2xl"

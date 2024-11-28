@@ -12,6 +12,7 @@ const InputContainer = ({
 }) => {
   const [overflow, setOverflow] = useState("hidden");
   const [scrollHeight, setScrollHeight] = useState(0);
+  const [showPreview, setShowPreview] = useState(false);
 
   const handleInput = (e) => {
     e.target.style.height = "auto";
@@ -50,6 +51,7 @@ const InputContainer = ({
       setInput("");
       setFile(null);
       setScrollHeight(0);
+      setShowPreview(false);
     }
   };
 
@@ -67,7 +69,12 @@ const InputContainer = ({
 
   return (
     <div className="bg-input p-2 m-2 rounded-3xl w-[95%] md:w-[75%] lg:w-[42%] ">
-      <PreviewImages files={file} setFiles={setFile} />
+      <PreviewImages
+        files={file}
+        setFiles={setFile}
+        showPreview={showPreview}
+        setShowPreview={setShowPreview}
+      />
       <div className="flex items-end justify-between">
         <div className="justify-start">
           <input
