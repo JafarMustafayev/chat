@@ -10,7 +10,7 @@ function PreviewImages({ files, setFiles, showPreview, setShowPreview }) {
   }, [files]);
 
   const handleRemove = (index) => {
-    var newFiles = files.filter((i) => i !== index);
+    var newFiles = files.filter((file, i) => i !== index);
     setFiles(newFiles);
   };
 
