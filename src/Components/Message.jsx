@@ -1,3 +1,4 @@
+import { useRef } from "react";
 const Message = ({ message, isUser, isLoading, image }) => {
   const formatMessage = (text) => {
     const parts = text.split(/(\*\*.*?\*\*)/g);
@@ -31,12 +32,18 @@ const Message = ({ message, isUser, isLoading, image }) => {
       <div className={`  text-white max-w-[85%] md:max-w-[70%]`}>
         <div className={` ${isUser ? "justify-end" : "justify-start"}`}>
           {image && (
-            <button className="justify-end">
-              <img
-                className="max-w-64 max-h-64   rounded-3xl"
-                src={"data:image/jpeg;base64," + image}
-              />
-            </button>
+            <div className="flex flex-col items-center justify-end gap-1 ">
+              {image.map((img, index) => {
+                return (
+                  <button className="justify-end" onClick={() => {}}>
+                    <img
+                      className="max-w-64 max-h-64 border-white border-2 rounded-3xl"
+                      src={"data:image/jpeg;base64," + img}
+                    />
+                  </button>
+                );
+              })}
+            </div>
           )}
           <div className={`flex ${isUser ? "justify-end" : "justify-start"} `}>
             <div
