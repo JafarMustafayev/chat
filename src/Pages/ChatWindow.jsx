@@ -115,7 +115,6 @@ const ChatWindow = () => {
           <h1 className="text-2xl text-white font-bold mx-auto">Chatbot</h1>
         </div>
 
-        {/* Chat window */}
         <div className="flex-1 w-full flex justify-center overflow-y-auto custom-scrollbar">
           <div className="w-full max-w-[95%] md:max-w-[75%] lg:max-w-[60%] p-2 space-y-2">
             {messages.map((msg, index) => (
@@ -124,6 +123,7 @@ const ChatWindow = () => {
                 message={msg.text}
                 isUser={msg.isUser}
                 isLoading={msg.isLoading || false}
+                image={msg.image}
               />
             ))}
             <div ref={messagesEndRef} />

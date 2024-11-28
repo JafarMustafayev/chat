@@ -1,4 +1,4 @@
-const Message = ({ message, isUser, isLoading }) => {
+const Message = ({ message, isUser, isLoading, image }) => {
   const formatMessage = (text) => {
     const parts = text.split(/(\*\*.*?\*\*)/g);
 
@@ -27,13 +27,30 @@ const Message = ({ message, isUser, isLoading }) => {
   };
 
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
-      <div
-        className={`${isUser ? "bg-blue-600" : "bg-gray-600"} ${
-          isLoading ? "animate-pulse h-9 w-[60%] opacity-70" : ""
-        } text-white p-2 rounded-lg mb-2 max-w-[85%] md:max-w-[70%] break-words whitespace-pre-wrap`}
-      >
-        {!isLoading ? formatMessage(message) : ""}
+    <div className={`flex ${isUser ? "justify-end" : "justify-start"}   `}>
+      <div className={`  text-white max-w-[85%] md:max-w-[70%]`}>
+        <div className={` ${isUser ? "justify-end" : "justify-start"}`}>
+          {image && (
+            <button className="justify-end">
+              <img
+                className="max-w-64 max-h-64   rounded-3xl"
+                src={"data:image/jpeg;base64," + image}
+              />
+            </button>
+          )}
+          <div className={`flex ${isUser ? "justify-end" : "justify-start"} `}>
+            <div
+              className={`rounded-3xl p-2 mb-2 break-words whitespace-pre-wrap
+                ${
+                  isUser
+                    ? "bg-blue-600 rounded-tr-lg"
+                    : "bg-gray-600 rounded-tl-lg"
+                }`}
+            >
+              {!isLoading ? formatMessage(message) : ""}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
