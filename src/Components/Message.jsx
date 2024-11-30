@@ -1,8 +1,13 @@
-import { useState } from "react";
+import Modal from "../Components/Modal";
 
-const Message = ({ message, isUser, isLoading, image }) => {
-  const [modalImage, setModalImage] = useState(null);
-
+const Message = ({
+  message,
+  isUser,
+  isLoading,
+  image,
+  setModalImage,
+  modalImage,
+}) => {
   const formatMessage = (text) => {
     return text.split(/(\*\*.*?\*\*)/g).map((part, index) => {
       const isBold = part.startsWith("**") && part.endsWith("**");
@@ -24,7 +29,6 @@ const Message = ({ message, isUser, isLoading, image }) => {
     <>
       <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
         <div className="text-white max-w-[85%] md:max-w-[70%]">
-          {/* Şəkil varsa göstər */}
           {image && (
             <div className="flex flex-col items-center justify-end gap-1">
               {image.map((img, index) => (
@@ -57,34 +61,7 @@ const Message = ({ message, isUser, isLoading, image }) => {
         </div>
       </div>
 
-      {modalImage && (
-        <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50"
-          onClick={closeModal}
-        >
-          <div
-            className="relative bg-white p-1 rounded-lg"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="absolute top-2 right-2 text-black text-xl font-bold"
-              onClick={closeModal}
-            >
-              &times;
-            </button>
-
-            <img
-              className="w-full h-auto rounded-lg"
-              src={modalImage}
-              style={{
-                maxHeight: "70vh",
-                maxWidth: "70vh",
-              }}
-              alt="Modal Image"
-            />
-          </div>
-        </div>
-      )}
+      <Modal />
     </>
   );
 };
