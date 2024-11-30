@@ -4,12 +4,11 @@ import { ModalContext } from "../Pages/ChatWindow";
 
 function Modal() {
   const { modalImage, setModalImage } = useContext(ModalContext);
-  debugger;
+
   console.log(modalImage);
 
   const closeModal = () => setModalImage(null);
   if (modalImage != null) {
-    debugger;
     return (
       <>
         <div

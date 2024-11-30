@@ -140,7 +140,7 @@ const ChatWindow = () => {
           {/* Centered Input at bottom */}
           <div className="flex justify-center w-full">
             {status === "error" ? (
-              <Regenerate input={input} reSend={reSend} status={status} />
+              <Regenerate reSend={reSend} />
             ) : (
               <Input
                 input={input}

@@ -1,4 +1,4 @@
-const Regenerate = ({ input, reSend, status }) => {
+const Regenerate = ({ reSend }) => {
   return (
     <button
       onClick={() => {
