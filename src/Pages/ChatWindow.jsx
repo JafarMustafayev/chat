@@ -2,11 +2,8 @@ import React, { useState, useEffect, useRef, createContext } from "react";
 import apiRequest from "../api/ApiRequests";
 import Message from "../Components/Message";
 import Resend from "../Components/Resend";
-
 import NewChatSvg from "../SVG/NewChat";
-
 import Input from "../Components/Input";
-
 import "../Style/ChatWindow.css";
 
 export const ModalContext = createContext();
@@ -76,7 +73,7 @@ const ChatWindow = () => {
           {/* Top bar with button and title */}
           <div className="flex justify-between items-center  mb-4">
             <button
-              className="h-10 rounded-lg px-2 focus-visible:outline-0 items-start text-white   hover:bg-input"
+              className="h-10 rounded-lg px-2 focus-visible:outline-0 items-start text-white hover:bg-input"
               onClick={newChat}
               title="New chat"
             >

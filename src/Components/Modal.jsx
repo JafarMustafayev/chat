@@ -5,8 +5,6 @@ import { ModalContext } from "../Pages/ChatWindow";
 function Modal() {
   const { modalImage, setModalImage } = useContext(ModalContext);
 
-  console.log(modalImage);
-
   const closeModal = () => setModalImage(null);
   if (modalImage != null) {
     return (

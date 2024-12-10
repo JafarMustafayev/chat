@@ -33,7 +33,7 @@ const InputContainer = ({
   }, [scrollHeight]);
 
   useEffect(() => {
-    if (input === "") {
+    if (input == "") {
       setScrollHeight(0);
     }
   }, [input]);
@@ -60,7 +60,11 @@ const InputContainer = ({
 
   const AddedImages = async (files) => {
     var image = [];
-    for (let index = 0; index < files.length; index++) {
+    for (
+      let index = 0;
+      index < (files.length > 2 ? 2 : files.length);
+      index++
+    ) {
       const element = files[index];
       var res = await base64(element);
 
@@ -110,7 +114,7 @@ const InputContainer = ({
             autoFocus={true}
             rows={1}
             onKeyDown={handleKeyDown}
-            placeholder="Promt daxil edin..."
+            placeholder="Enter prompt..."
             style={{
               overflow: overflow,
               maxHeight: "240px",
