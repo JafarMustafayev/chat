@@ -1,13 +1,6 @@
 import Modal from "../Components/Modal";
 
-const Message = ({
-  message,
-  isUser,
-  isLoading,
-  image,
-  setModalImage,
-  modalImage,
-}) => {
+const Message = ({ message, setModalImage }) => {
   const formatMessage = (text) => {
     return text.split(/(\*\*.*?\*\*)/g).map((part, index) => {
       const isBold = part.startsWith("**") && part.endsWith("**");
@@ -24,14 +17,17 @@ const Message = ({
   };
 
   const closeModal = () => setModalImage(null);
-
   return (
     <>
-      <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+      <div
+        className={`flex ${
+          message.role == "user" ? "justify-end" : "justify-start"
+        }`}
+      >
         <div className="text-white max-w-[85%] md:max-w-[70%]">
-          {image && (
-            <div className="flex flex-col items-center justify-end gap-1">
-              {image.map((img, index) => (
+          {message.images && (
+            <div className="flex flex-col items-center justify-end gap-1 my-1">
+              {message.images.map((img, index) => (
                 <button
                   key={index}
                   className="justify-end"
@@ -47,15 +43,19 @@ const Message = ({
             </div>
           )}
 
-          <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+          <div
+            className={`flex ${
+              message.role == "user" ? "justify-end" : "justify-start"
+            }`}
+          >
             <div
-              className={`rounded-3xl p-2 mb-2 break-words whitespace-pre-wrap ${
-                isUser
+              className={`rounded-3xl p-2 break-words whitespace-pre-wrap ${
+                message.role == "user"
                   ? "bg-blue-600 rounded-tr-lg"
                   : "bg-gray-600 rounded-tl-lg"
               }`}
             >
-              {!isLoading && formatMessage(message)}
+              {formatMessage(message.content)}
             </div>
           </div>
         </div>

@@ -22,27 +22,13 @@ const ChatWindow = () => {
 
   const handleSend = async () => {
     if (input.trim()) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          text: input,
-          isUser: true,
-          image: file,
-        },
-      ]);
-
+      messages.push({
+        role: "user",
+        content: input,
+        images: file,
+      });
       setStatus("pending");
       setInput("");
-
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          text: "",
-          isUser: false,
-          isLoading: true,
-          image: null,
-        },
-      ]);
       sendApiRequests();
     }
   };
@@ -59,25 +45,13 @@ const ChatWindow = () => {
 
   const sendApiRequests = async () => {
     try {
-      const res = await apiRequest(input, file);
+      const res = await apiRequest(messages);
       if (isResending) {
         setInput("");
         setIsResending(false);
       }
-      // var botResponse;
 
-      // if (res && res.outputs && res.outputs.length > 0) {
-      //   botResponse = res.outputs[0].text.trim();
-      // }
-
-      setMessages((prevMessages) => [
-        ...prevMessages.slice(0, -1),
-        {
-          //text: botResponse,
-          text: res.response,
-          isUser: false,
-        },
-      ]);
+      setMessages((prevMessages) => [...prevMessages, res.message]);
 
       setStatus("success");
     } catch (error) {
@@ -104,6 +78,7 @@ const ChatWindow = () => {
             <button
               className="h-10 rounded-lg px-2 focus-visible:outline-0 items-start text-white   hover:bg-input"
               onClick={newChat}
+              title="New chat"
             >
               <NewChatSvg />
             </button>
@@ -116,12 +91,8 @@ const ChatWindow = () => {
               {messages.map((msg, index) => (
                 <Message
                   key={index}
-                  message={msg.text}
-                  isUser={msg.isUser}
-                  isLoading={msg.isLoading || false}
-                  image={msg.image}
+                  message={msg}
                   setModalImage={setModalImage}
-                  modalImage={modalImage}
                 />
               ))}
               <div ref={messagesEndRef} />
